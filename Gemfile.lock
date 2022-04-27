@@ -67,6 +67,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
+    braintree (2.104.1)
+      builder (>= 2.0.0)
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.36.0)
@@ -83,6 +85,10 @@ GEM
     crass (1.0.6)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -118,6 +124,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.0)
     minitest (5.15.0)
     msgpack (1.5.1)
     net-protocol (0.1.3)
@@ -127,12 +134,17 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.3-arm64-darwin)
+    nokogiri (1.13.4)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
+    nokogiri (1.13.4-arm64-darwin)
       racc (~> 1.4)
     parallel (1.22.1)
+    paranoia (2.6.0)
+      activerecord (>= 5.1, < 7.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
-    public_suffix (4.0.6)
+    public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
     pundit (2.2.0)
@@ -174,7 +186,7 @@ GEM
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    regexp_parser (2.2.1)
+    regexp_parser (2.3.1)
     rexml (3.2.5)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
@@ -184,7 +196,7 @@ GEM
     rspec-mocks (3.11.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
-    rspec-rails (5.1.1)
+    rspec-rails (5.1.2)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       railties (>= 5.2)
@@ -193,7 +205,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
-    rubocop (1.28.1)
+    rubocop (1.28.2)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
@@ -252,12 +264,15 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  ruby
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
+  braintree (~> 2.61, >= 2.61.1)
   byebug
   capybara (~> 3.36)
+  dotenv-rails (~> 2.1, >= 2.1.1)
   factory_bot_rails (~> 6.2)
   faker (~> 2.20)
   foreman (~> 0.87.2)
@@ -266,6 +281,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   net-smtp
+  paranoia (~> 2.1, >= 2.1.5)
   puma (~> 5.0)
   pundit (~> 2.2)
   rails (~> 6.1.5)

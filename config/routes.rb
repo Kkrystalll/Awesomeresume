@@ -11,6 +11,14 @@ Rails.application.routes.draw do
 
     member do
       patch :pin
+      post :buy
+    end
+
+  end
+
+  resources :orders, only: [] do
+    member do
+      get :checkout
     end
   end
 
@@ -24,6 +32,17 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :vendors, except: [:show]
     resources :users, only: [:index]
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :resumes, only: [] do
+        member do
+          post :like
+          delete :unlike
+        end
+      end
+    end
   end
 
   root 'resumes#index'

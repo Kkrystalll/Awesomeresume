@@ -18,6 +18,7 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons/faQuestionCi
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons/faRightFromBracket"
 import { faVideo } from "@fortawesome/free-solid-svg-icons/faVideo"
 import { faPeopleGroup } from "@fortawesome/free-solid-svg-icons/faPeopleGroup"
+// import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart"
 
 config.mutateApproach = "sync"
 

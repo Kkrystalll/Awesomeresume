@@ -34,7 +34,7 @@ module MyResume
       g.stylesheets     false
       g.helper          false
     end
-
+    config.i18n.default_locale = :"zh-TW"
     config.time_zone = 'Taipei'
     # Configuration for the application, engines, and railties goes here.
     #

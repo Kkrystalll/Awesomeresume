@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Resume < ApplicationRecord
-  extend FriendlyId
-  friendly_id :random_slug, use: :slugged
-
+  include Slugable
+  acts_as_paranoid
+  
   has_one_attached :mugshot
   has_many_attached :attachments
 
@@ -14,12 +14,15 @@ class Resume < ApplicationRecord
   # scope
   scope :published, -> { where(status: 'published') }
   scope :draft, -> { where(status: 'draft') }
+  # default_scope { where(deleted_at: nil) }
 
   # callbacks
   before_create :set_as_default
 
   # relationships
   belongs_to :user
+  has_many :vendor_resumes
+  has_many :vendors, through: :vendor_resumes
 
   def self.all_status
     [
@@ -33,11 +36,9 @@ class Resume < ApplicationRecord
     value.to_s.parameterize(preserve_case: true)
   end
 
-  private
-
-  def random_slug
-    [*'A'..'Z', *'a'..'z', *'0'..'9'].sample(10).join
-  end
+  # def destroy
+  #   update(deleted_at: Time.current)
+  # end
 
   def set_as_default
     self.pinned = true if user.resumes.count.zero?

@@ -1,0 +1,6 @@
+zh-TW:
+  submit:
+    models:
+      resume:
+        create: "新增履歷"
+        update: "更新履歷"

@@ -23,3 +23,5 @@ test:
 production:
   <<: *default
   database: db/production.sqlite3
+  username: root
+  password: <%= ENV.fetch("DB_PASSWORD") { 123456 } %>

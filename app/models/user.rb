@@ -12,10 +12,17 @@ class User < ApplicationRecord
 
   # relationships
   has_many :resumes
+  has_many :vendor_resumes
+  has_many :favorite_resumes, through: :vendor_resumes, source: :resume
+  has_many :orders
 
   # scopes
   scope :vendors, -> { where(role: 'vendor') }
   scope :students, -> { where(role: 'user') }
+
+  def liked?(r)
+    favorite_resumes.exists?(r.id)
+  end
 
   def default_resume
     resumes.last

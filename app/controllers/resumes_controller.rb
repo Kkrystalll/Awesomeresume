@@ -52,8 +52,8 @@ class ResumesController < BaseController
 
   def destroy
     authorize :resume
-
     @resume.destroy
+    # @resume.update(deleted_at: Time.current)
     redirect_to resumes_path, notice: '已刪除'
   end
 
@@ -64,6 +64,14 @@ class ResumesController < BaseController
     @resume.update(pinned: true)
 
     redirect_to my_resumes_path
+  end
+
+  def buy
+    #建立訂單
+    resume = Resume.published.friendly.find(params[:id])
+    order = current_user.orders.create(price: 10, resume: resume)
+
+    redirect_to checkout_order_path(order)
   end
 
   private

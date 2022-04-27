@@ -9,7 +9,12 @@
     <%= image_pack_tag "placeholder-image.png" %>
   <% end %>
 
-  <footer class="actions">
+  <footer class="flex justify-between actions" >
     <%= link_to "檢視", '#' %>
+    <%= link_to '花錢是老大', buy_resume_path(resume), method: :post %>
+    <div data-controller="favorite-resume" data-liked="<%= current_user.liked?(resume) %>" data-resume-id="<%= resume.slug %>">
+      <a href="#" data-action="click->favorite-resume#like" data-favorite-resume-target="like">讚</a>
+      <a href="#" data-action="click->favorite-resume#unlike" data-favorite-resume-target="unlike">不讚</a>
+    </div>
   </footer>
 </article>
