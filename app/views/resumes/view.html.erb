@@ -1,0 +1,33 @@
+<h1 class="heading"><%= @resume.user.name %></h1>
+
+<section class="grid grid-cols-2 gap-4">
+  <article>
+    <%= form_with(model: @resume, url: tag_resume_path(@resume),method: :post) do |form| %>
+      <div class="field">
+        <%= form.label :date, "日期"%>
+        <%= form.text_field :date, class: "rounded px-2 py-1 border border-gray-300", data: {controller: "date"} %>
+      </div>
+      <div class="field">
+        <%= form.label :tag %>
+        <%= form.text_field :tag, class: "rounded px-2 py-1 border border-gray-300", data: {controller: "tag"} %>
+      </div>
+      <%= form.submit "標籤"%>
+    <% end %>
+    <div class="bg-gray-50">
+      <%= @resume.content %>
+    </div>
+  </article>
+  <section>
+    <%= form_with(model: [@resume, @comment], data: { remote: true }) do |form| %>
+      <div class="field">
+        <%= form.label :content, "評論" %>
+        <%= form.text_area :content, class: "rounded px-2 py-1 border border-gray-300" %>
+      </div>
+      <%= form.submit %>
+    <% end %>
+    <div class="comments">
+      <%= render @comments %>
+    </div>
+  </section>
+    
+</section>

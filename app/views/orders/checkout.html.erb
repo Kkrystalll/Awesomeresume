@@ -1,3 +1,8 @@
 <h1 class="heading"><%= params[:id] %>結帳</h1>
 
-<div id="payme" data-token="<%= @token %>" data-controller="payme"></div>
+<%= form_with(model: @order, url: pay_order_path(@order), method: :post) do |form| %>
+
+  <div data-token="<%= @token %>" data-controller="payme"></div>
+
+  <%= form.submit "付錢來", data: { disable_with: "處理中請稍候..." } %>
+<% end %>

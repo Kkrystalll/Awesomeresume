@@ -9,7 +9,7 @@ class ResumesController < BaseController
     if user_signed_in? && current_user.role == 'user'
       redirect_to my_resumes_path
     else
-      @resumes = Resume.published.where(pinned: true)
+      @resumes = Resume.published.where(pinned: true).includes(:user)
     end
   end
 
@@ -72,6 +72,19 @@ class ResumesController < BaseController
     order = current_user.orders.create(price: 10, resume: resume)
 
     redirect_to checkout_order_path(order)
+  end
+
+  def view
+    @resume = Resume.published.friendly.find(params[:id])
+    @comment = Comment.new
+    @comments = @resume.comments.order(id: :desc)
+  end
+
+  def tag
+    resume = Resume.published.friendly.find(params[:id])
+    tag = params[:resume][:tag]
+    resume.update(tag: tag)
+    redirect_to view_resume_path(resume), notice: '新增標籤成功'
   end
 
   private

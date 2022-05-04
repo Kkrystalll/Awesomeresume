@@ -23,6 +23,7 @@ class Resume < ApplicationRecord
   belongs_to :user
   has_many :vendor_resumes
   has_many :vendors, through: :vendor_resumes
+  has_many :comments
 
   def self.all_status
     [

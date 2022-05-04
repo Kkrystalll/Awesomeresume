@@ -1,6 +1,16 @@
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2022_04_26_071418) do
+ActiveRecord::Schema.define(version: 2022_05_04_032221) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -28,6 +38,18 @@ ActiveRecord::Schema.define(version: 2022_04_26_071418) do
     t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "resume_id", null: false
+    t.text "content"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deleted_at"], name: "index_comments_on_deleted_at"
+    t.index ["resume_id"], name: "index_comments_on_resume_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -63,6 +85,7 @@ ActiveRecord::Schema.define(version: 2022_04_26_071418) do
     t.string "slug"
     t.boolean "pinned", default: false
     t.datetime "deleted_at"
+    t.string "tag"
     t.index ["slug"], name: "index_resumes_on_slug", unique: true
     t.index ["user_id"], name: "index_resumes_on_user_id"
   end
@@ -90,6 +113,8 @@ ActiveRecord::Schema.define(version: 2022_04_26_071418) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "resumes"
+  add_foreign_key "comments", "users"
   add_foreign_key "orders", "resumes"
   add_foreign_key "orders", "users"
   add_foreign_key "vendor_resumes", "resumes"
